@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class Const {
 
+    public static final int FEED_COMMENT_FIRST_CNT=4;
     public static final int FEED_COUNT_PER_PAGE=20;
     public static final int LOGIN_FAIL_ID_NOT_EXISTS=2;
     public static final int LOGIN_FAIL_PASSWORD_IS_NOT_CORRECT =3;

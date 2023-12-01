@@ -1,7 +1,10 @@
 package com.green.greengram3.feed;
 
 import com.green.greengram3.common.ResVo;
+
+import com.green.greengram3.feed.model.FeedFavDto;
 import com.green.greengram3.feed.model.FeedInsDto;
+import com.green.greengram3.feed.model.FeedSelProcVo;
 import com.green.greengram3.feed.model.FeedSelVo;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +25,14 @@ public class FeedController {
     }
 
     @GetMapping
-    public List<FeedSelVo> selFeed(@RequestParam int page){
-        return service.selFeed(page);
+    public List<FeedSelVo> selFeed(FeedSelProcVo dto) {
+        return service.selFeed(dto);
     }
+
+    @GetMapping("/fav")
+    public ResVo toggleFeedFav(FeedFavDto dto) {
+        return service.toggleFeedFav(dto);
+
+    }
+
 }

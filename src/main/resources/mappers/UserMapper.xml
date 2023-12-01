@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.greengram3.user.UserMapper">
+
+    <insert id="insUser" useGeneratedKeys="true" keyProperty="iuser">
+        insert into t_user
+        set uid=#{uid},
+        upw=#{upw},
+        nm=#{nm},
+        pic=#{pic}
+    </insert>
+
+    <select id="selUser">
+        select iuser,upw,nm,pic
+        from t_user
+        where uid=#{uid}
+    </select>
+    <select id="userInfo">
+        SELECT count(distinct F.ifeed) AS feedCnt , COUNT(L.ifeed) AS facVnt ,
+        U.nm,U.created_at AS createdAt
+        FROM t_feed F
+        left JOIN t_feed_fav L
+        ON F.ifeed=L.ifeed
+        right JOIN t_user U
+        ON F.iuser=U.iuser
+        WHERE U.iuser=#{targetIuser}
+    </select>
+    <update id="upUserPic">
+        update t_user
+        set pic=#{pic}
+        where iuser=#{iuser}
+    </update>
+</mapper>

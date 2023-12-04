@@ -27,7 +27,7 @@ public class UserService {
     public UserSignInVo signin(UserSignDto dto){
         UserSignProcDto savedVo=mapper.selUser(dto);
         UserSignInVo vo =new UserSignInVo();
-        if(savedVo.getUpw()==null) {
+        if(savedVo==null) {
             vo.setResult(Const.LOGIN_FAIL_ID_NOT_EXISTS);
             return vo;
         } else if (!BCrypt.checkpw(dto.getUpw(), savedVo.getUpw())){

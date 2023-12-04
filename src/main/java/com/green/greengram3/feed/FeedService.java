@@ -5,12 +5,14 @@ import com.green.greengram3.common.Const;
 import com.green.greengram3.common.ResVo;
 import com.green.greengram3.feed.model.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static com.green.greengram3.common.Const.FEED_COMMENT_FIRST_CNT;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class FeedService {
@@ -70,4 +72,23 @@ public class FeedService {
             return new ResVo(fmapper.insFeedFav(dto));
         }
     }
+
+    public ResVo delFeed(FeedDelDto dto){
+
+        FeedDelDto iuser=mapper.selOneFeed(dto.getIfeed());
+
+        if(iuser==null || dto.getIuser() != iuser.getIuser()){
+            return new ResVo(0);
+        }
+        if(dto.getIuser()==iuser.getIuser()){
+            mapper.delPic(dto.getIfeed());
+            mapper.delComment(dto.getIfeed());
+            mapper.delFav(dto.getIfeed());
+            mapper.delFeed(dto.getIfeed());
+            return new ResVo(1);
+        }
+        return new ResVo(1);
+    }
+
+
 }

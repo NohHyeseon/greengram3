@@ -2,16 +2,15 @@ package com.green.greengram3.feed;
 
 import com.green.greengram3.common.ResVo;
 
-import com.green.greengram3.feed.model.FeedFavDto;
-import com.green.greengram3.feed.model.FeedInsDto;
-import com.green.greengram3.feed.model.FeedSelProcVo;
-import com.green.greengram3.feed.model.FeedSelVo;
+import com.green.greengram3.feed.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/feed")
@@ -33,6 +32,12 @@ public class FeedController {
     public ResVo toggleFeedFav(FeedFavDto dto) {
         return service.toggleFeedFav(dto);
 
+    }
+
+    @DeleteMapping
+    public ResVo delFeed(FeedDelDto dto) {
+        log.info("dto: {}", dto);
+        return service.delFeed(dto);
     }
 
 }

@@ -25,5 +25,30 @@
         limit #{starIdx},#{row}
     </select>
 
+    <delete id="delComment">
+        DELETE FROM t_feed_comment
+        WHERE ifeed=#{ifeed}
+    </delete>
+
+    <select id="selOneFeed">
+        select iuser
+        from t_feed
+        where ifeed=#{ifeed}
+    </select>
+
+    <delete id="delPic">
+        delete from t_feed_pics
+        where ifeed=#{ifeed}
+    </delete>
+    <delete id="delFav">
+        delete from t_feed_fav
+        where ifeed=#{ifeed}
+    </delete>
+    <delete id="delFeed">
+        delete from t_feed
+        where ifeed=#{ifeed}
+    </delete>
+
+
 
 </mapper>

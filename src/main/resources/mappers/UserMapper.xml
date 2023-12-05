@@ -32,4 +32,13 @@
         set pic=#{pic}
         where iuser=#{iuser}
     </update>
+<insert id="insFollow">
+    insert into t_user_follow
+    set to_iuser=#{toIuser},
+    from_iuser=#{fromIuser}
+</insert>
+    <delete id="delFollow">
+        delete from t_user_follow
+        where to_iuser=#{toIuser} and from_iuser=#{fromIuser}
+    </delete>
 </mapper>

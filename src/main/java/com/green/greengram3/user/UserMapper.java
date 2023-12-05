@@ -10,4 +10,7 @@ public interface UserMapper {
     UserInfoVo userInfo(int targetIuser);
     int upUserPic(int iuser);
 
+    int insFollow(UserFollowDto dto);
+    int delFollow(UserFollowDto dto);
+
 }

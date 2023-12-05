@@ -14,6 +14,7 @@ public class FeedSelVo { //전체피드 가져오기
     private String writerNm;
     private String writerPic;
     private List<String> pics;
+
     private int isFav; //1:좋아요했음, 0:좋아요아님
     private List<FeedCommentSelVo> comments;
     private int isMoreComment;//0:댓글이 더 없엄 1:댓글이 더 있음

@@ -15,9 +15,20 @@
         FROM t_feed F
         JOIN t_user U
         ON F.iuser=U.iuser
-        left join t_feed_fav L
+        <choose>
+            <when test="isFavList ==1">
+                INNER JOIN t_feed_fav L
+            </when>
+            <otherwise>
+                LEFT JOIN t_feed_fav L
+            </otherwise>
+        </choose>
         on F.ifeed=L.ifeed
         and L.iuser=#{loginedIuser}
+        <if test="isFavList ==0 and targetIuser>0">
+            where F.iuser=#{targetIuser}
+        </if>
+
 <!--        <if test="targetIuser>0">-->
 <!--            where F.iuser=#{targetIuser}-->
 <!--        </if>-->
@@ -44,6 +55,7 @@
         delete from t_feed_fav
         where ifeed=#{ifeed}
     </delete>
+
     <delete id="delFeed">
         delete from t_feed
         where ifeed=#{ifeed}

@@ -24,13 +24,14 @@ public class UserService {
         return vo;//회원가입한 iuser pk값이 리턴
 
     }
-    public UserSignInVo signin(UserSignDto dto){
-        UserSignProcDto savedVo=mapper.selUser(dto);
-        UserSignInVo vo =new UserSignInVo();
-        if(savedVo==null) {
+
+    public UserSignInVo signin(UserSignDto dto) {
+        UserSignProcDto savedVo = mapper.selUser(dto);
+        UserSignInVo vo = new UserSignInVo();
+        if (savedVo == null) {
             vo.setResult(Const.LOGIN_FAIL_ID_NOT_EXISTS);
             return vo;
-        } else if (!BCrypt.checkpw(dto.getUpw(), savedVo.getUpw())){
+        } else if (!BCrypt.checkpw(dto.getUpw(), savedVo.getUpw())) {
             vo.setResult(Const.LOGIN_FAIL_PASSWORD_IS_NOT_CORRECT);
             return vo;
         }
@@ -42,14 +43,26 @@ public class UserService {
 
         return vo;
     }
-    public UserInfoVo getInfo(int targetIuser){
+
+    public UserInfoVo getInfo(int targetIuser) {
         return mapper.userInfo(targetIuser);
     }
-    public ResVo upUser(int iuser){
+
+    public ResVo upUser(int iuser) {
         ResVo vo = new ResVo(mapper.upUserPic(iuser));
         return vo;
     }
 
 
+    public ResVo toggleFollow(UserFollowDto dto) {
+        int del = mapper.delFollow(dto);
+        if (del == 1) {
+            return new ResVo(0);
+        } else {
+            return new ResVo(mapper.insFollow(dto));
+        }
+    }
 
 }
+
+

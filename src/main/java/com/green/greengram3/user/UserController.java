@@ -2,10 +2,7 @@ package com.green.greengram3.user;
 
 
 import com.green.greengram3.common.ResVo;
-import com.green.greengram3.user.model.UserInfoVo;
-import com.green.greengram3.user.model.UserSignDto;
-import com.green.greengram3.user.model.UserSignInVo;
-import com.green.greengram3.user.model.UserSignupDto;
+import com.green.greengram3.user.model.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
@@ -39,6 +36,14 @@ public class UserController {
     @PutMapping("/update")
     public ResVo upUserpic(int iuser){
         return service.upUser(iuser);
+    }
+
+    //------------------------------follow
+    //ResVo  - result: following:1, unfollowing:0
+    @PostMapping("/follow")
+    public ResVo toggleFollow(@RequestBody UserFollowDto dto){
+       return service.toggleFollow(dto);
+
     }
 
 }

@@ -23,15 +23,24 @@ public class UserController {
         return service.signup(dto);
     }
 
+    @PatchMapping("/firebase-token")
+    public ResVo patchUserFirebaseToken(@RequestBody UserFirebaseTokenPatchDto dto){
+        return service.patchUserFirebaseToken(dto);
+    }
+
+    @PatchMapping("/pic")
+    public ResVo patchUserPic(@RequestBody UserPicPatchDto dto) {
+        return service.patchUserPic(dto);}
+
     //pk값, nm ,pic ,
     @PostMapping("/signin")
     public UserSignInVo postUser(@RequestBody UserSignDto dto) {
         return service.signin(dto);
     }
 
-    @GetMapping("/info")
-    public UserInfoVo getUserInfo(int targetIuser){
-        return service.getInfo(targetIuser);
+    @GetMapping
+    public UserInfoVo getUserInfo(UserInfoSelDto userInfoSelDto){
+        return service.getInfo(userInfoSelDto);
     }
     @PutMapping("/update")
     public ResVo upUserpic(int iuser){

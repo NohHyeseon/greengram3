@@ -44,8 +44,8 @@ public class UserService {
         return vo;
     }
 
-    public UserInfoVo getInfo(int targetIuser) {
-        return mapper.userInfo(targetIuser);
+    public UserInfoVo getInfo(UserInfoSelDto userInfoSelDto) {
+        return mapper.userInfo(userInfoSelDto);
     }
 
     public ResVo upUser(int iuser) {
@@ -61,6 +61,16 @@ public class UserService {
         } else {
             return new ResVo(mapper.insFollow(dto));
         }
+    }
+
+    public ResVo patchUserFirebaseToken(UserFirebaseTokenPatchDto dto) {
+        int affectedRows = mapper.updUserFirebaseToken(dto);
+        return new ResVo(affectedRows);
+    }
+
+    public ResVo patchUserPic(UserPicPatchDto dto) {
+        int affectedRows = mapper.updUserPic(dto);
+        return new ResVo(affectedRows);
     }
 
 }

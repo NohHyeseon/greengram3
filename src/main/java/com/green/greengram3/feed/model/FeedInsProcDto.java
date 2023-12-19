@@ -19,4 +19,9 @@ public class FeedInsProcDto {
         this.location=dto.getLocation();
         this.pics=dto.getPics();
     }
+
+    public FeedInsProcDto() {
+
+
+    }
 }

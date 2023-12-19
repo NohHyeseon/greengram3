@@ -14,4 +14,8 @@ public class FeedPicProcDto {
         this.ifeed=dto.getIfeed();
         this.pics=dto.getPics();
     }
+
+    public FeedPicProcDto() {
+
+    }
 }

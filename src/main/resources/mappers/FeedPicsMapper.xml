@@ -17,6 +17,10 @@
     from t_feed_pics
     WHERE ifeed=#{ifeed}
 </select>
+    <delete id="delPic">
+        delete from t_feed_pics
+        where ifeed=#{ifeed}
+    </delete>
 
 
 

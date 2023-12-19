@@ -10,5 +10,6 @@ import java.util.List;
 public interface FeedPicsMapper {
     int insPic(FeedPicProcDto dto);
     List<String> selFeedPic(int ifeed);
+    int delPic(int ifeed);
 
 }

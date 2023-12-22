@@ -25,6 +25,7 @@ public class FeedController {
 
     @GetMapping
     public List<FeedSelVo> selFeed(FeedSelProcVo dto) {
+        log.info("dto = {}", dto);
         return service.selFeed(dto);
     }
 

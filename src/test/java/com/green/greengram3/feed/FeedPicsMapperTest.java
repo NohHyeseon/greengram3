@@ -30,9 +30,9 @@ class FeedPicsMapperTest {
     }
 
     @Autowired
-    FeedPicsMapper mapper;
+    FeedPicsMapper mapper; // @MybatisTest 애노테이션으로 인해 들어올 수 있음 >>객체화를 시켜줌 service, controller는 안됨
 
-    @BeforeEach
+    @BeforeEach// 테스트전 한 구간만 "각각" 먼저 테스트를 한다
     public void beforEach() {
 
         int affectedRows = mapper.delPic(dto.getIfeed());

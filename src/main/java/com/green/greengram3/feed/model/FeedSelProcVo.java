@@ -22,6 +22,7 @@ public class FeedSelProcVo { //페이징 객체 /limit 에 사용
 
 
     public void setPage(int page){
+
         this.starIdx=(page-1)*row;
     }
 

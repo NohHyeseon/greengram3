@@ -23,30 +23,41 @@ public class FeedService {
 
     public ResVo postFeed(FeedInsDto dto) {
         FeedInsProcDto dto1 = new FeedInsProcDto(dto);
-        mapper.insFeed(dto1);
+        int feedAffectedRows= mapper.insFeed(dto1);
+        // Test시 맵퍼 xml 파일과 연결이 안되서 일을 못하니까 테스트에서 값을 넣어서 보내줌
+        log.info("feedAffectedRows, {}",feedAffectedRows);
         FeedPicProcDto pic = new FeedPicProcDto(dto1);
-        pmapper.insPic(pic);
+        int feedAffectedRows2 =pmapper.insPic(pic);
+        log.info("feedAffectedRows2, {}",feedAffectedRows2);
         ResVo vo = new ResVo(pic.getIfeed());
         return vo;
     }
 
     public List<FeedSelVo> selFeed(FeedSelProcVo dto) {
-        List<FeedSelVo> feeds = (mapper.selFeed(dto));
+
+        List<FeedSelVo> feeds = (mapper.selFeed(dto)); // 사진과 코멘트는 가지고오지않음
+        log.info("feeds {}", feeds);
         FeedCommentSelDto fcDto = new FeedCommentSelDto();
         fcDto.setStartIdx(0);
         fcDto.setRowCount(4);
         for (FeedSelVo feed : feeds) { //왼쪽이 하나값 오른쪽이 여러개피드
             List<String> pics = pmapper.selFeedPic(feed.getIfeed());
+
+
+            log.info("pics {}",pics);
+
             // 피드에 사진 넣어야됨
             // 넣음 당해야 되는 피드 : feed
             // 넣어 져야 하는 사진 : pics
             feed.setPics(pics);
 
+
             fcDto.setIfeed(feed.getIfeed());
             List<FeedCommentSelVo> comments = cmapper.selFeedCommentAll(fcDto);
             feed.setComments(comments);
 
-            if(comments.size()==FEED_COMMENT_FIRST_CNT){
+
+            if(comments.size()==FEED_COMMENT_FIRST_CNT){//4
                 feed.setIsMoreComment(1);
                 comments.remove(comments.size()-1);
             }
@@ -57,6 +68,7 @@ public class FeedService {
 
         }
 
+        log.info("feeds {}", feeds);
 //        -- 1page 0~19 (20ㄱㅐ) 2page 20~49 (20개)
 //        -- (page-1)*20
         return feeds;
